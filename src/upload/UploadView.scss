@@ -1,0 +1,13 @@
+.upload-view__date-picker {
+  .react-datepicker {
+    margin-top: -2px;
+
+    &__triangle {
+      display: none;
+    }
+  }
+
+  & input {
+    width: 100%;
+  }
+}
