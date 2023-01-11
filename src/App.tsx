@@ -1,9 +1,13 @@
-import React from 'react';
-import './App.css';
+import React, {Suspense} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import AppRouter from './router/AppRouter';
 
 function App() {
   return (
-    <div>Hello</div>
+    <Suspense fallback={<>Loading</>}>
+      <AppRouter />
+    </Suspense>
   );
 }
 
