@@ -3,7 +3,6 @@ import {FileUploader} from '@aws-amplify/ui-react';
 import {addYears, subYears} from 'date-fns';
 import DatePicker from 'react-datepicker';
 import t from '../i18n/translations';
-import './UploadView.scss';
 
 const UploadView: React.FC = () => {
   const today = new Date();
@@ -11,8 +10,8 @@ const UploadView: React.FC = () => {
 
   return (
     <div>
-      <h2>{t.upload.selectMonth}</h2>
-      <div className="upload-view__date-picker">
+      <h2>{t.datePicker.selectMonth}</h2>
+      <div className="date-picker">
         <DatePicker
           selected={date}
           onChange={(date: Date) => setDate(date)}
@@ -30,7 +29,6 @@ const UploadView: React.FC = () => {
           accessLevel="protected"
           maxSize={10_000_000}
           maxFiles={5}
-          onSuccess={e => console.log('uploaded', e.key)}
           isPreviewerVisible
         />
       </div>

@@ -6,6 +6,7 @@ import AppRouter from './router/AppRouter';
 import {Authenticator} from '@aws-amplify/ui-react';
 import {Amplify} from 'aws-amplify';
 import AppSpinner from './spinner/AppSpinner';
+import './App.scss';
 
 Amplify.configure({
   Auth: {
