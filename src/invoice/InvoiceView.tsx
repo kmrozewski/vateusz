@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import InvoiceTable from './table/InvoiceTable';
-import {addYears, parse, subYears} from 'date-fns';
+import {addYears, format, parse, subYears} from 'date-fns';
 import DatePicker, {registerLocale} from 'react-datepicker';
 import pl from 'date-fns/locale/pl';
 import {Storage} from 'aws-amplify';
@@ -10,9 +10,9 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {formatYearMonth, formatYearMonthPath} from '../util/dateUtil';
 
 export interface Invoice {
-  name: string;
+  s3Key: string;
   fileSize: string;
-  lastUpdated: Date;
+  lastUpdated: string;
 }
 
 registerLocale('pl', pl);
@@ -30,9 +30,9 @@ const InvoiceView: React.FC = () => {
     const files = data.results
       .filter(item => item.key && !item.key.endsWith('/'))
       .map(item => ({
-        name: item.key!,
+        s3Key: item.key!,
         fileSize: prettyBytes(item.size ?? 0, {locale: 'pl'}),
-        lastUpdated: item.lastModified ?? new Date(),
+        lastUpdated: format(item.lastModified ?? new Date(), 'yyyy-MM-dd HH:mm'),
       }));
     setInvoices(files);
   }, [currentMonth]);

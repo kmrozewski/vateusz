@@ -33,6 +33,19 @@ const translations = {
         remove: 'Usuń',
       },
     },
+    rename: {
+      title: 'Zmień nazwę pliku',
+      description: 'Podaj nową nazwę pliku',
+      close: 'Anuluj',
+      save: 'Zapisz',
+      availability: 'Nazwa jest już zajęta',
+    },
+    remove: {
+      title: 'Potwierdź usunięcie',
+      description: 'Czy na pewno chcesz trwale usunąc ten plik?',
+      close: 'Odłóż',
+      ok: 'Wyrzuć',
+    },
   },
 };
 
