@@ -3,9 +3,9 @@ import {Table} from 'react-bootstrap';
 import t from '../../i18n/translations';
 import {Invoice} from '../InvoiceView';
 import InvoiceActions from './InvoiceActions';
-import {useCognitoGroup} from '../../hooks/useCognitoGroup';
 import RenameModal, {IRenameModal} from '../modal/RenameModal';
 import RemoveModal, {IRemoveModal} from '../modal/RemoveModal';
+import {useCognitoGroup} from '../../hooks/useCognitoGroup';
 
 interface IProps {
   invoices: Invoice[];

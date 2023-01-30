@@ -4,3 +4,17 @@
     justify-content: space-between;
   }
 }
+
+.invoice-view {
+  .react-datepicker {
+    margin-top: -2px;
+
+    &__triangle {
+      display: none;
+    }
+  }
+
+  & input {
+    width: 100%;
+  }
+}

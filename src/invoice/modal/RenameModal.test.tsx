@@ -1,12 +1,10 @@
 import React from 'react';
-import {setupMock} from '../../util/amplifyMock';
 import userEvent from '@testing-library/user-event';
 import RenameModal from './RenameModal';
 import {render, screen} from '@testing-library/react';
 import t from '../../i18n/translations';
 import {Storage} from 'aws-amplify';
 
-jest.mock('aws-amplify');
 describe('<RenameModal/>', () => {
   const initialKey = 'someKey/kotek.gif';
   const initialName = 'kotek.gif';
@@ -14,8 +12,6 @@ describe('<RenameModal/>', () => {
   const nameSuffix = '_rychu';
   const newName = 'kotek_rychu';
   const newKey = 'someKey/kotek_rychu.gif';
-
-  beforeEach(setupMock);
 
   it('when new name is correct then user should be able to rename the file', async () => {
     const user = userEvent.setup();

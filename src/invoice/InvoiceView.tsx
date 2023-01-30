@@ -4,10 +4,12 @@ import {addYears, format, parse, subYears} from 'date-fns';
 import DatePicker, {registerLocale} from 'react-datepicker';
 import pl from 'date-fns/locale/pl';
 import {Storage} from 'aws-amplify';
-import prettyBytes from 'pretty-bytes';
 import t from '../i18n/translations';
 import {useNavigate, useParams} from 'react-router-dom';
-import {formatYearMonth, formatYearMonthPath} from '../util/dateUtil';
+import {formatYearMonthPath} from '../util/dateUtils';
+import bytes from 'bytes';
+import AppSpinner from '../spinner/AppSpinner';
+import './Invoice.scss';
 
 export interface Invoice {
   s3Key: string;
@@ -18,24 +20,28 @@ export interface Invoice {
 registerLocale('pl', pl);
 
 const InvoiceView: React.FC = () => {
+  const now = new Date();
   const navigate = useNavigate();
-  const {year, month} = useParams();
+  const {year = format(now, 'yyyy'), month = format(now, 'MM')} = useParams();
   const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const currentMonth = formatYearMonth(year!, month!);
-  const today = parse(year + '-' + month, 'yyyy-MM', new Date());
+  const [loading, setLoading] = useState(false);
+  const invoicesDirectory = year + '-' + month;
+  const today = parse(invoicesDirectory, 'yyyy-MM', now);
 
   const fetchInvoices = useCallback(async () => {
     // TODO: add pagination
-    const data = await Storage.list(currentMonth, {level: 'protected', pageSize: 'ALL'});
+    setLoading(true);
+    const data = await Storage.list(invoicesDirectory, {level: 'protected', pageSize: 'ALL'});
     const files = data.results
       .filter(item => item.key && !item.key.endsWith('/'))
       .map(item => ({
         s3Key: item.key!,
-        fileSize: prettyBytes(item.size ?? 0, {locale: 'pl'}),
+        fileSize: bytes(item.size ?? 0),
         lastUpdated: format(item.lastModified ?? new Date(), 'yyyy-MM-dd HH:mm'),
       }));
     setInvoices(files);
-  }, [currentMonth]);
+    setLoading(false);
+  }, [invoicesDirectory]);
 
   useEffect(() => {
     fetchInvoices();
@@ -44,7 +50,7 @@ const InvoiceView: React.FC = () => {
   return (
     <>
       <h2>{t.datePicker.selectMonth}</h2>
-      <div className="date-picker">
+      <div className="invoice-view">
         <DatePicker
           selected={today}
           onChange={(date: Date) => navigate('/invoices/' + formatYearMonthPath(date))}
@@ -54,7 +60,7 @@ const InvoiceView: React.FC = () => {
           maxDate={addYears(today, 1)}
           showMonthYearPicker
         />
-        <InvoiceTable invoices={invoices} />
+        {loading ? <AppSpinner className="invoice-view__spinner" /> : <InvoiceTable invoices={invoices} />}
       </div>
     </>
   );

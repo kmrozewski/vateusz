@@ -2,12 +2,10 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import InvoiceActions from './InvoiceActions';
 import t from '../../i18n/translations';
-import {setupMock} from '../../util/amplifyMock';
 
-const s3Key = 'someKey/kotek.gif';
-const fileName = 'kotek.gif';
 describe('<InvoiceActions/>', () => {
-  beforeEach(setupMock);
+  const s3Key = 'someKey/kotek.gif';
+  const fileName = 'kotek.gif';
 
   it('cognito group user has button to rename and remove file', async () => {
     const renameModal = jest.fn();

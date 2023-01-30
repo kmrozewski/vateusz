@@ -4,12 +4,8 @@ import RemoveModal from './RemoveModal';
 import userEvent from '@testing-library/user-event';
 import {Storage} from 'aws-amplify';
 import t from '../../i18n/translations';
-import {setupMock} from '../../util/amplifyMock';
 
-jest.mock('aws-amplify');
 describe('<RemoveModal/>', () => {
-  beforeEach(setupMock);
-
   const testModalActions = async (name: string, removeCalled: boolean) => {
     const removeMock = jest.mocked(Storage.remove);
     const onClose = jest.fn();
