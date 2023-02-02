@@ -2,18 +2,22 @@ import React, {useEffect, useState} from 'react';
 import t from '../../i18n/translations';
 import {Button} from 'react-bootstrap';
 import {Storage} from 'aws-amplify';
+import {useIdentityId} from '../../hooks/useIdentityId';
+import {IRenameModal} from '../modal/RenameModal';
+import {IShowModal} from '../table/InvoiceTable';
+import {IModal} from '../modal/RemoveModal';
 
 interface IProps {
   s3Key: string;
   fileName: string;
   isUser: boolean;
-  renameModal: (s3Key: string, fileName: string) => void;
-  removeModal: (s3Key: string) => void;
-  identityId?: string;
+  showRenameModal: IShowModal<IRenameModal>;
+  showRemoveModal: IShowModal<IModal>;
 }
 
-const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, renameModal, removeModal, identityId}) => {
+const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameModal, showRemoveModal}) => {
   const [url, setUrl] = useState('');
+  const identityId = useIdentityId();
 
   const getFile = async () => {
     const downloadUrl = await Storage.get(s3Key, {level: 'protected', identityId});
@@ -30,12 +34,12 @@ const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, renameModal,
         {t.invoice.table.actions.download}
       </a>
       {isUser ? (
-        <Button className="mx-3" variant="outline-success" onClick={() => renameModal(s3Key, fileName)}>
+        <Button className="mx-3" variant="outline-success" onClick={() => showRenameModal({s3Key, fileName, show: true})}>
           {t.invoice.table.actions.rename}
         </Button>
       ) : null}
       {isUser ? (
-        <Button variant="outline-danger" onClick={() => removeModal(s3Key)}>
+        <Button variant="outline-danger" onClick={() => showRemoveModal({s3Key, show: true})}>
           {t.invoice.table.actions.remove}
         </Button>
       ) : null}

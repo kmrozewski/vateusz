@@ -3,11 +3,10 @@ import {Button, Form, Modal} from 'react-bootstrap';
 import t from '../../i18n/translations';
 import {Storage} from 'aws-amplify';
 import {getExtension, getFileNameWithoutExtension} from '../../util/filePathUtils';
+import {IModal} from './RemoveModal';
 
-export interface IRenameModal {
-  s3Key: string;
+export interface IRenameModal extends IModal {
   fileName: string;
-  show: boolean;
 }
 
 interface IProps {

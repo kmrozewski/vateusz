@@ -12,6 +12,8 @@ const translations = {
   navigation: {
     bar: {
       title: 'Vateusz',
+      toggleAriaLabel: '',
+      offcanvasAriaLabel: '',
     },
     pages: {
       home: 'Dodaj plik',
@@ -46,6 +48,19 @@ const translations = {
       close: 'Odłóż',
       ok: 'Wyrzuć',
     },
+  },
+  upload: {
+    title: 'Prześlij lub upuść plik tutaj',
+    hoverTitle: 'Upuść tutaj',
+    errors: {
+      maxSize: 'Zbyt duży rozmiar pliku',
+    },
+  },
+  admin: {
+    title: 'Wybierz użytkownika z listy',
+    tip: 'Nastepnie przejdź do zakładki Pliki',
+    selected: 'Aktualnie wybrany użytkownik',
+    empty: 'Brak użytkowników do wyświetlenia',
   },
 };
 

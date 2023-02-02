@@ -3,7 +3,7 @@ import {Button, Modal} from 'react-bootstrap';
 import t from '../../i18n/translations';
 import {Storage} from 'aws-amplify';
 
-export interface IRemoveModal {
+export interface IModal {
   s3Key: string;
   show: boolean;
 }
@@ -12,7 +12,7 @@ interface IProps {
   onClose: () => void;
 }
 
-type Props = IRemoveModal & IProps;
+type Props = IModal & IProps;
 
 const RemoveModal: React.FC<Props> = ({s3Key, show, onClose}) => {
   const {title, description, close, ok} = t.invoice.remove;

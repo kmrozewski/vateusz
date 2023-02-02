@@ -2,6 +2,14 @@
   &__contianer {
     display: flex;
     justify-content: space-between;
+    padding: 0 16px 16px 16px;
+  }
+}
+
+.invoice-card {
+  &__text {
+    display: flex;
+    justify-content: space-between;
   }
 }
 

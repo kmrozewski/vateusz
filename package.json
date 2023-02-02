@@ -23,6 +23,7 @@
     "react-bootstrap": "^2.7.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-drag-drop-files": "^2.3.8",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
     "sass": "^1.57.1",
@@ -42,6 +43,11 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    }
   },
   "prettier": {
     "semi": true,
@@ -69,6 +75,8 @@
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.2"
+    "identity-obj-proxy": "^3.0.0",
+    "prettier": "^2.8.2",
+    "ts-node": "^10.9.1"
   }
 }

@@ -24,7 +24,7 @@ Amplify.configure({
   },
 });
 
-function App() {
+const App: React.FC = () => {
   return (
     <Authenticator.Provider>
       <Suspense fallback={<AppSpinner />}>
@@ -32,6 +32,6 @@ function App() {
       </Suspense>
     </Authenticator.Provider>
   );
-}
+};
 
 export default App;

@@ -1,19 +1,18 @@
 import React, {PropsWithChildren} from 'react';
 import {Container} from 'react-bootstrap';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-
-const UploadView = React.lazy(() => import('../upload/UploadView'));
-const InvoiceView = React.lazy(() => import('../invoice/InvoiceView'));
+import {BrowserRouter} from 'react-router-dom';
+import {useCognitoGroup} from '../hooks/useCognitoGroup';
+import UserRoutes from './UserRoutes';
+import AdminRoutes from './AdminRoutes';
 
 const AuthRouter: React.FC<PropsWithChildren> = ({children}) => {
+  const [isUser] = useCognitoGroup();
+
   return (
     <BrowserRouter>
       <Container>
         {children}
-        <Routes>
-          <Route path="/" element={<UploadView />} />
-          <Route path="/invoices/:year/:month" element={<InvoiceView />} />
-        </Routes>
+        {isUser ? <UserRoutes /> : <AdminRoutes />}
       </Container>
     </BrowserRouter>
   );

@@ -1,0 +1,30 @@
+.upload-view {
+  .react-datepicker {
+    margin-top: -2px;
+
+    &__triangle {
+      display: none;
+    }
+  }
+
+  & input {
+    width: 100%;
+  }
+
+  &__errors {
+    color: red;
+  }
+
+  &__uploader {
+    & label {
+      height: 100px;
+      width: 100%;
+      max-width: none;
+      border: 1px solid slategray;
+    }
+
+    .file-types {
+      max-width: none;
+    }
+  }
+}
