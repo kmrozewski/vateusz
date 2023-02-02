@@ -1,12 +1,19 @@
 import React from 'react';
 import {Spinner} from 'react-bootstrap';
 import t from '../i18n/translations';
+import classNames from 'classnames';
+import './AppSpinner.scss';
 
-const AppSpinner: React.FC = () => {
+interface IProps {
+  className?: string;
+}
+const AppSpinner: React.FC<IProps> = ({className}) => {
   return (
-    <Spinner animation="border" role="status">
-      <span className="visually-hidden">{t.spinner.loading}</span>
-    </Spinner>
+    <div className={classNames('app-spinner__container', className)}>
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">{t.spinner.loading}</span>
+      </Spinner>
+    </div>
   );
 };
 
