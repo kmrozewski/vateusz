@@ -1,0 +1,17 @@
+.navigation-bar {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    @media (max-width: 768px) {
+      row-gap: 12px;
+    }
+  }
+
+  &__links {
+    @media (min-width: 576px) {
+      display: flex;
+    }
+  }
+}

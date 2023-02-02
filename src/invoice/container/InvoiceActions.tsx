@@ -6,6 +6,8 @@ import {useIdentityId} from '../../hooks/useIdentityId';
 import {IRenameModal} from '../modal/RenameModal';
 import {IShowModal} from '../table/InvoiceTable';
 import {IModal} from '../modal/RemoveModal';
+import useBreakpoint from 'use-breakpoint';
+import {breakpoints} from '../../breakpoint/Mobile';
 
 interface IProps {
   s3Key: string;
@@ -18,6 +20,8 @@ interface IProps {
 const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameModal, showRemoveModal}) => {
   const [url, setUrl] = useState('');
   const identityId = useIdentityId();
+  const {breakpoint} = useBreakpoint(breakpoints, 'desktop');
+  const {download, rename, renameShort, remove} = t.invoice.table.actions;
 
   const getFile = async () => {
     const downloadUrl = await Storage.get(s3Key, {level: 'protected', identityId});
@@ -31,16 +35,16 @@ const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameMo
   return (
     <div className="invoice-actions__contianer">
       <a href={url} target="_blank" rel="noreferrer noopener" className="btn btn-outline-primary">
-        {t.invoice.table.actions.download}
+        {download}
       </a>
       {isUser ? (
         <Button className="mx-3" variant="outline-success" onClick={() => showRenameModal({s3Key, fileName, show: true})}>
-          {t.invoice.table.actions.rename}
+          {breakpoint === 'mobile' ? renameShort : rename}
         </Button>
       ) : null}
       {isUser ? (
         <Button variant="outline-danger" onClick={() => showRemoveModal({s3Key, show: true})}>
-          {t.invoice.table.actions.remove}
+          {remove}
         </Button>
       ) : null}
     </div>

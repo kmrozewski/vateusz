@@ -32,6 +32,7 @@ const translations = {
       actions: {
         download: 'Pobierz',
         rename: 'Zmień nazwę',
+        renameShort: 'Zmień',
         remove: 'Usuń',
       },
     },

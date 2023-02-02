@@ -10,7 +10,7 @@ const AuthRouter: React.FC<PropsWithChildren> = ({children}) => {
 
   return (
     <BrowserRouter>
-      <Container>
+      <Container fluid="xl">
         {children}
         {isUser ? <UserRoutes /> : <AdminRoutes />}
       </Container>
