@@ -1,6 +1,33 @@
+# VATEUSZ
+
+## Description
+This SPA (hosted in S3) enabled authenticated users (with AWS Cognito) to store invoice files in their protected buckets. The accountant with privileges to specific user can access the invoices added by the user and process them.
+
 ## Architecture
 ![architecture diagram](./docs/Architecture.png)
 
+### Tech stack
+* React, typescript
+* aws-amplify/react, react-bootstrap
+* react-router v6
+* testing-library, jest
+* npm
+
+## Deployment
+```bash
+# Build
+rm -rf build
+npm install
+npm run build
+
+# Deploy to S3
+aws s3 rm s3://{AWS_BUCKET_NAME}}/ --recursive --profile {AWS_PROFILE_NAME}
+aws s3 cp ./build s3://{AWS_BUCKET_NAME}}/ --recursive --profile {AWS_PROFILE_NAME}
+
+# Invalidate Cloud Front distribution
+aws cloudfront create-invalidation --distribution-id {CLOUDFRONT_DISTRIBUTION_ID} --paths '/*' --profile {AWS_PROFILE_NAME}
+
+```
 
 ## Available Scripts
 
