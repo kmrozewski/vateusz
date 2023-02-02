@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {Card} from 'react-bootstrap';
 import {Invoice} from '../../hooks/useInvoices';
 import {IShowModal} from '../table/InvoiceTable';

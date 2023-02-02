@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import InvoiceTable from './table/InvoiceTable';
 import {addYears, format, parse, subYears} from 'date-fns';
 import DatePicker, {registerLocale} from 'react-datepicker';
 import pl from 'date-fns/locale/pl';
