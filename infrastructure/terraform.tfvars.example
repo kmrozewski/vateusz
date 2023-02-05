@@ -1,3 +1,5 @@
 profile = ""
 region = ""
-site_bucket_name = ""
+app_name = ""
+domain = ""
+level = ""
