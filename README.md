@@ -6,12 +6,15 @@ This SPA (hosted in S3) enabled authenticated users (with AWS Cognito) to store 
 ## Architecture
 ![architecture diagram](./docs/Architecture.png)
 
+See more in the [Infrastructure](./infrastructure/README.md) section.
+
 ### Tech stack
 * React, typescript
 * aws-amplify/react, react-bootstrap
 * react-router v6
 * testing-library, jest
 * npm
+* terraform
 
 ## Deployment
 ```bash
