@@ -11,6 +11,12 @@
 # production
 /build
 
+# infrastructure
+infrastructure/.terraform/
+infrastructure/*.tfstate*
+infrastructure/*.tfvars
+infrastructure/*.lock*
+
 # misc
 .idea
 .DS_Store
