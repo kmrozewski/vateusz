@@ -6,7 +6,7 @@ This SPA (hosted in S3) enabled authenticated users (with AWS Cognito) to store 
 ## Architecture
 ![architecture diagram](./docs/Architecture.png)
 
-See more in the [Infrastructure](./infrastructure/README.md) section.
+See more in the [Infrastructure](./infrastructure/) section.
 
 ### Tech stack
 * React, typescript
