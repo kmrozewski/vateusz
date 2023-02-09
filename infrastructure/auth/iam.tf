@@ -25,7 +25,7 @@ data aws_iam_policy_document assume_federated_identity {
     condition {
       test     = "StringEquals"
       variable = "cognito-identity.amazonaws.com:aud"
-      values   = ["eu-west-1:33317ecd-cb98-45b8-bcd1-4539495fb098"]
+      values   = [aws_cognito_identity_pool.identity.id]
     }
 
     condition {
@@ -51,11 +51,7 @@ data aws_iam_policy_document s3_read {
   statement {
     effect = "Allow"
 
-    resources = [
-      aws_s3_bucket.user_files.arn,
-      "${aws_s3_bucket.user_files.arn}/protected/*",
-      "${aws_s3_bucket.user_files.arn}/private/*",
-    ]
+    resources = local.bucket_resources
 
     actions = [
       "s3:GetObjectAcl",
@@ -85,11 +81,7 @@ data aws_iam_policy_document s3_read_write {
   statement {
     effect = "Allow"
 
-    resources = [
-      aws_s3_bucket.user_files.arn,
-      "${aws_s3_bucket.user_files.arn}/private/$${cognito-identity.amazonaws.com:sub}/*",
-      "${aws_s3_bucket.user_files.arn}/protected/$${cognito-identity.amazonaws.com:sub}/*",
-    ]
+    resources = local.bucket_resources
 
     actions = [
       "s3:PutObject",

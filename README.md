@@ -16,21 +16,21 @@ See more in the [Infrastructure](./infrastructure/) section.
 * npm
 * terraform
 
-## Deployment
-```bash
-# Build
-rm -rf build
-npm install
-npm run build
+##  Prerequisities
+* aws-cli
+* terraform >=1.3.7
+* NodeJS v16+
 
-# Deploy to S3
-aws s3 rm s3://{AWS_BUCKET_NAME}}/ --recursive --profile {AWS_PROFILE_NAME}
-aws s3 cp ./build s3://{AWS_BUCKET_NAME}}/ --recursive --profile {AWS_PROFILE_NAME}
+## Getting started
+### Infrastructure
+* Create AWS profile in `~/.aws/config` and add AWS access keys
+* Copy `terraform.tfvars.example` as `terraform.tfvars`
+* Build terraform infrastructure with `terraform apply`
 
-# Invalidate Cloud Front distribution
-aws cloudfront create-invalidation --distribution-id {CLOUDFRONT_DISTRIBUTION_ID} --paths '/*' --profile {AWS_PROFILE_NAME}
-
-```
+### Project
+* Run `npm install` to install dependencies
+* Copy `.env.local.example` as `.env.local`
+* Copy `.env.local.example` as `.env.production.local` for separate environment
 
 ## Available Scripts
 
@@ -58,3 +58,19 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Deployment
+```bash
+# Build
+rm -rf build
+npm install
+npm run build
+
+# Deploy to S3
+aws s3 rm s3://{AWS_BUCKET_NAME}}/ --recursive --profile {AWS_PROFILE_NAME}
+aws s3 cp ./build s3://{AWS_BUCKET_NAME}}/ --recursive --profile {AWS_PROFILE_NAME}
+
+# Invalidate Cloud Front distribution
+aws cloudfront create-invalidation --distribution-id {CLOUDFRONT_DISTRIBUTION_ID} --paths '/*' --profile {AWS_PROFILE_NAME}
+
+```
