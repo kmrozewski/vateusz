@@ -36,6 +36,7 @@
     "eslint:quiet": "eslint --quiet .",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:dev": "env-cmd -f .env.local npm run build",
     "test": "react-scripts test"
   },
   "eslintConfig": {
@@ -72,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
