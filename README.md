@@ -1,5 +1,6 @@
 # VATEUSZ
 
+
 ## Description
 This SPA (hosted in S3) enabled authenticated users (with AWS Cognito) to store invoice files in their protected buckets. The accountant with privileges to specific user can access the invoices added by the user and process them.
 
