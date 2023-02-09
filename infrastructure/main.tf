@@ -14,14 +14,49 @@ provider aws {
   profile = var.profile
 }
 
-provider aws {
-  alias  = "acm_provider"
-  region = var.acm_region
-  profile = var.profile
-}
+
 
 locals {
-  origin = "https://${var.domain}"
-  sub_origin = "https://${var.level}.${var.domain}"
+  origin = var.domain
   s3_domain = "${var.app_name}.s3-website-${var.region}.amazonaws.com"
+}
+
+module static_site {
+  source = "./static_site"
+
+  app_name = var.app_name
+  domain = var.domain
+  profile = var.profile
+
+  region = var.region
+  acm_region = var.acm_region
+  level = var.level
+
+  hosted_zone_id = aws_route53_zone.main.id
+  is_localhost_available = false
+}
+
+module dev_static_site {
+  source = "./static_site"
+
+  app_name = "${var.level}-${var.app_name}"
+  domain = "${var.level}.${var.domain}"
+  profile = var.profile
+
+  region = var.region
+  acm_region = var.acm_region
+  level = var.level
+
+  hosted_zone_id = aws_route53_zone.main.id
+  is_localhost_available = true
+}
+
+module auth {
+  source = "./auth"
+  depends_on = [module.static_site]
+
+  app_name = var.app_name
+  domain = var.domain
+  sub_domain = "${var.level}.${var.domain}"
+  level = var.level
 }

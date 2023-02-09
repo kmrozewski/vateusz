@@ -44,7 +44,7 @@ resource aws_cloudfront_distribution primary {
 }
 
 resource aws_cloudfront_cache_policy primary {
-  name = "Managed-CachingOptimized"
+  name = "${var.app_name}-cache-policy"
   comment = "Default policy when CF compression is enabled"
   min_ttl = 1
 

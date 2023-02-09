@@ -9,6 +9,7 @@ resource aws_s3_bucket_policy site_contents {
 
 resource aws_s3_bucket_acl site_contents {
   bucket = aws_s3_bucket.site_contents.id
+  acl = "public-read"
 }
 
 data aws_iam_policy_document site_contents {
@@ -42,7 +43,7 @@ resource aws_s3_bucket_cors_configuration site_contents {
   cors_rule {
     allowed_headers = ["*"] // TODO: improve it
     allowed_methods = ["GET", "POST", "HEAD"]
-    allowed_origins = [local.origin]
+    allowed_origins = local.allowed_origins
     max_age_seconds = 3600
   }
 }
@@ -66,7 +67,7 @@ resource aws_s3_bucket_cors_configuration user_files {
   cors_rule {
     allowed_headers = ["*"] // TODO: improve it
     allowed_methods = ["GET", "POST", "PUT", "DELETE"]
-    allowed_origins = [local.origin]
+    allowed_origins = local.allowed_origins
     max_age_seconds = 3600
   }
 }
@@ -85,4 +86,5 @@ resource aws_s3_bucket_server_side_encryption_configuration user_files {
 
 resource aws_s3_bucket_acl user_files {
   bucket = aws_s3_bucket.user_files.id
+  acl = "private"
 }

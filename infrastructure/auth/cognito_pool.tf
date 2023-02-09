@@ -50,13 +50,14 @@ resource aws_cognito_user_pool pool {
 }
 
 resource aws_cognito_user_pool_client pool {
-  name                  = var.app_name
-  user_pool_id          = aws_cognito_user_pool.pool.id
-  access_token_validity = 60
-  id_token_validity     = 60
+  name                                 = var.app_name
+  user_pool_id                         = aws_cognito_user_pool.pool.id
+  access_token_validity                = 60
+  id_token_validity                    = 60
+  callback_urls                        = [local.origin, local.sub_origin]
   allowed_oauth_flows_user_pool_client = true
-  allowed_oauth_flows   = ["code"]
-  allowed_oauth_scopes  = [
+  allowed_oauth_flows                  = ["code"]
+  allowed_oauth_scopes                 = [
     "aws.cognito.signin.user.admin",
     "email",
     "openid",
@@ -81,19 +82,19 @@ resource aws_cognito_user_pool_client pool {
   }
 }
 
-resource aws_cognito_user_group admin_group {
-  name = "admin"
-  description = "Administrator group"
+resource aws_cognito_user_group user_group {
+  name         = "user"
   user_pool_id = aws_cognito_user_pool.pool.id
-  precedence = 1
-  role_arn = aws_iam_role.s3_read.arn
+  precedence   = 1
+  role_arn     = aws_iam_role.s3_read_write.arn
 }
 
-resource aws_cognito_user_group user_group {
-  name = "user"
+resource aws_cognito_user_group admin_group {
+  name         = "admin"
+  description  = "Administrator group"
   user_pool_id = aws_cognito_user_pool.pool.id
-  precedence = 2
-  role_arn = aws_iam_role.s3_read_write.arn
+  precedence   = 2
+  role_arn     = aws_iam_role.s3_read.arn
 }
 
 
