@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@aws-amplify/ui-react/styles.css';
 import AppRouter from './router/AppRouter';
-import {Authenticator} from '@aws-amplify/ui-react';
-import {Amplify} from 'aws-amplify';
+import {Authenticator, translations} from '@aws-amplify/ui-react';
+import {Amplify, I18n} from 'aws-amplify';
 import AppSpinner from './spinner/AppSpinner';
 import './App.scss';
 
@@ -23,6 +23,9 @@ Amplify.configure({
     },
   },
 });
+
+I18n.putVocabularies(translations);
+I18n.setLanguage('pl');
 
 const App: React.FC = () => {
   return (
