@@ -29,3 +29,13 @@ variable level {
   type        = string
   description = "Environment level e.g. dev/test/prod"
 }
+
+variable cognito_user_pool_arn {
+  type        = string
+  description = "Cognito user pool ARN"
+}
+
+variable zone_id {
+  type = string
+  description = "Route53 zone id"
+}

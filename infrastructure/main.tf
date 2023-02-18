@@ -14,25 +14,18 @@ provider aws {
   profile = var.profile
 }
 
-
-
-locals {
-  origin = var.domain
-  s3_domain = "${var.app_name}.s3-website-${var.region}.amazonaws.com"
-}
-
 module static_site {
   source = "./static_site"
 
   app_name = var.app_name
-  domain = var.domain
-  profile = var.profile
+  domain   = var.domain
+  profile  = var.profile
 
-  region = var.region
+  region     = var.region
   acm_region = var.acm_region
-  level = var.level
+  level      = var.level
 
-  hosted_zone_id = aws_route53_zone.main.id
+  hosted_zone_id         = aws_route53_zone.main.id
   is_localhost_available = false
 }
 
@@ -40,23 +33,36 @@ module dev_static_site {
   source = "./static_site"
 
   app_name = "${var.level}-${var.app_name}"
-  domain = "${var.level}.${var.domain}"
-  profile = var.profile
+  domain   = "${var.level}.${var.domain}"
+  profile  = var.profile
 
-  region = var.region
+  region     = var.region
   acm_region = var.acm_region
-  level = var.level
+  level      = var.level
 
-  hosted_zone_id = aws_route53_zone.main.id
+  hosted_zone_id         = aws_route53_zone.main.id
   is_localhost_available = true
 }
 
 module auth {
-  source = "./auth"
+  source     = "./auth"
   depends_on = [module.static_site]
 
-  app_name = var.app_name
-  domain = var.domain
+  app_name   = var.app_name
+  domain     = var.domain
   sub_domain = "${var.level}.${var.domain}"
-  level = var.level
+  level      = var.level
+}
+
+module user_info {
+  source     = "./user-info"
+  depends_on = [module.auth]
+
+  app_name   = var.app_name
+  domain     = var.domain
+  sub_domain = "${var.level}.${var.domain}"
+  level      = var.level
+
+  cognito_user_pool_arn = module.auth.cognito_user_pool_arn
+  zone_id               = aws_route53_zone.main.zone_id
 }
