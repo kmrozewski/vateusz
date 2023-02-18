@@ -54,6 +54,12 @@ module auth {
   level      = var.level
 }
 
+provider aws {
+  alias  = "acm"
+  region = var.acm_region
+  profile = var.profile
+}
+
 module user_info {
   source     = "./user-info"
   depends_on = [module.auth]
@@ -65,4 +71,9 @@ module user_info {
 
   cognito_user_pool_arn = module.auth.cognito_user_pool_arn
   zone_id               = aws_route53_zone.main.zone_id
+
+  providers = {
+    aws = aws
+    aws.acm = aws.acm
+  }
 }
