@@ -85,7 +85,7 @@ resource aws_cognito_user_pool_client pool {
 resource aws_cognito_user_group user_group {
   name         = "user"
   user_pool_id = aws_cognito_user_pool.pool.id
-  precedence   = 1
+  precedence   = 2
   role_arn     = aws_iam_role.s3_read_write.arn
 }
 
@@ -93,7 +93,7 @@ resource aws_cognito_user_group admin_group {
   name         = "admin"
   description  = "Administrator group"
   user_pool_id = aws_cognito_user_pool.pool.id
-  precedence   = 2
+  precedence   = 1
   role_arn     = aws_iam_role.s3_read.arn
 }
 
