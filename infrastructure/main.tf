@@ -14,6 +14,12 @@ provider aws {
   profile = var.profile
 }
 
+provider aws {
+  alias   = "acm"
+  region  = var.acm_region
+  profile = var.profile
+}
+
 module static_site {
   source = "./static_site"
 
@@ -21,12 +27,16 @@ module static_site {
   domain   = var.domain
   profile  = var.profile
 
-  region     = var.region
-  acm_region = var.acm_region
-  level      = var.level
+  region = var.region
+  level  = var.level
 
   hosted_zone_id         = aws_route53_zone.main.id
   is_localhost_available = false
+
+  providers = {
+    aws     = aws
+    aws.acm = aws.acm
+  }
 }
 
 module dev_static_site {
@@ -36,12 +46,16 @@ module dev_static_site {
   domain   = "${var.level}.${var.domain}"
   profile  = var.profile
 
-  region     = var.region
-  acm_region = var.acm_region
-  level      = var.level
+  region = var.region
+  level  = var.level
 
   hosted_zone_id         = aws_route53_zone.main.id
   is_localhost_available = true
+
+  providers = {
+    aws     = aws
+    aws.acm = aws.acm
+  }
 }
 
 module auth {
@@ -52,12 +66,6 @@ module auth {
   domain     = var.domain
   sub_domain = "${var.level}.${var.domain}"
   level      = var.level
-}
-
-provider aws {
-  alias  = "acm"
-  region = var.acm_region
-  profile = var.profile
 }
 
 module user_info {
@@ -73,7 +81,7 @@ module user_info {
   zone_id               = aws_route53_zone.main.zone_id
 
   providers = {
-    aws = aws
+    aws     = aws
     aws.acm = aws.acm
   }
 }
