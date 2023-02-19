@@ -36,11 +36,22 @@ variable cognito_user_pool_arn {
 }
 
 variable zone_id {
-  type = string
+  type        = string
   description = "Route53 zone id"
 }
 
 variable certificate_arn {
-  type = string
+  type    = string
   default = "ACM certificate ARN"
+}
+
+variable throttling_burst_limit {
+  type = number
+  description = "Throttling burst limit, set -1 to disable throttling"
+  default = 100
+}
+variable throttling_rate_limit {
+  type = number
+  description = "Throttling rate limit, set -1 to disable throttling"
+  default = 100
 }
