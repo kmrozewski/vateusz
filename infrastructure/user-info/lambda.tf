@@ -14,8 +14,11 @@ resource aws_lambda_function add_new_user_data {
 
   environment {
     variables = {
-      REGION = var.region
-      TABLE_NAME = aws_dynamodb_table.user_data.name
+      REGION        = var.region
+      TABLE_NAME    = aws_dynamodb_table.user_data.name
+      ALLOW_ORIGIN  = local.allow_origin
+      ALLOW_HEADERS = join(",", local.allow_headers)
+      ALLOW_METHODS = join(",", local.allow_methods)
     }
   }
 }

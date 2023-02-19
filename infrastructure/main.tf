@@ -77,8 +77,9 @@ module user_info {
   sub_domain = "${var.level}.${var.domain}"
   level      = var.level
 
-  zone_id               = aws_route53_zone.main.zone_id
-  cognito_user_pool_arn = module.auth.cognito_user_pool_arn
+  zone_id                = aws_route53_zone.main.zone_id
+  cognito_user_pool_arn  = module.auth.cognito_user_pool_arn
+  is_localhost_available = true
 
   providers = {
     aws     = aws

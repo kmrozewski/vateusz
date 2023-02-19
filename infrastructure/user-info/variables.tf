@@ -46,12 +46,18 @@ variable certificate_arn {
 }
 
 variable throttling_burst_limit {
-  type = number
+  type        = number
   description = "Throttling burst limit, set -1 to disable throttling"
-  default = 100
+  default     = 100
 }
+
 variable throttling_rate_limit {
-  type = number
+  type        = number
   description = "Throttling rate limit, set -1 to disable throttling"
-  default = 100
+  default     = 100
+}
+
+variable is_localhost_available {
+  type        = bool
+  description = "Flag add http://localhost:3000 to CORS"
 }
