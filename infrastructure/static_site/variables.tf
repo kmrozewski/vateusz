@@ -34,12 +34,3 @@ variable level {
   type        = string
   description = "Environment level e.g. dev/test/prod"
 }
-
-#variable domain_validation_options {
-#  description = "ACM domain name validation options"
-#}
-#
-#variable acm_certificate_arn {
-#  type        = string
-#  description = "ACM domain name certificate ARN"
-#}

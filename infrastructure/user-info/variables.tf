@@ -39,3 +39,8 @@ variable zone_id {
   type = string
   description = "Route53 zone id"
 }
+
+variable certificate_arn {
+  type = string
+  default = "ACM certificate ARN"
+}
