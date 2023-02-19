@@ -50,5 +50,5 @@ resource aws_lambda_permission add_new_user_data {
   function_name = aws_lambda_function.add_new_user_data.function_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_rest_api.proxy.execution_arn}/*/${aws_api_gateway_method.post.http_method}${aws_api_gateway_resource.proxy.path}"
+  source_arn = "${aws_api_gateway_rest_api.proxy.execution_arn}/*/*"
 }
