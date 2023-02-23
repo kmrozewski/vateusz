@@ -16,7 +16,7 @@ infrastructure/.terraform/
 infrastructure/*.tfstate*
 infrastructure/*.tfvars
 infrastructure/*.lock*
-infrastructure/user-info/empty_lambda.zip
+infrastructure/**/*.zip
 
 # misc
 .idea

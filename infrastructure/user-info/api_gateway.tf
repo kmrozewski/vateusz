@@ -21,42 +21,6 @@ resource aws_api_gateway_authorizer proxy {
   provider_arns = [var.cognito_user_pool_arn]
 }
 
-resource aws_api_gateway_method post {
-  http_method   = "POST"
-  authorization = "COGNITO_USER_POOLS"
-  authorizer_id = aws_api_gateway_authorizer.proxy.id
-  resource_id   = aws_api_gateway_resource.proxy.id
-  rest_api_id   = aws_api_gateway_resource.proxy.rest_api_id
-
-  request_parameters = {
-    "method.request.path.proxy" = true,
-  }
-}
-
-resource aws_api_gateway_integration proxy {
-  rest_api_id             = aws_api_gateway_rest_api.proxy.id
-  resource_id             = aws_api_gateway_resource.proxy.id
-  http_method             = aws_api_gateway_method.post.http_method
-  integration_http_method = aws_api_gateway_method.post.http_method
-  type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.add_new_user_data.invoke_arn
-}
-
-resource aws_api_gateway_method_response post_response {
-  for_each = toset(local.api_status_response)
-
-  rest_api_id         = aws_api_gateway_rest_api.proxy.id
-  http_method         = aws_api_gateway_method.post.http_method
-  resource_id         = aws_api_gateway_resource.proxy.id
-  status_code         = each.value
-  response_parameters = {
-    "method.response.header.Access-Control-Allow-Origin"  = true,
-    "method.response.header.Access-Control-Allow-Methods" = true,
-    "method.response.header.Access-Control-Allow-Headers" = true
-  }
-}
-
-
 resource aws_api_gateway_deployment proxy {
   rest_api_id = aws_api_gateway_rest_api.proxy.id
 
