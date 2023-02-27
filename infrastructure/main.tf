@@ -6,6 +6,13 @@ terraform {
     }
   }
 
+  cloud {
+    organization = "konradmrozewski"
+    workspaces {
+      name = "vateusz"
+    }
+  }
+
   required_version = ">= 1.3.7"
 }
 
