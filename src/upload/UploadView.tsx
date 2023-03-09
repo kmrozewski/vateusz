@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {addYears, format, subYears} from 'date-fns';
-import DatePicker from 'react-datepicker';
+import DatePicker, {registerLocale} from 'react-datepicker';
 import t from '../i18n/translations';
 import './UploadView.scss';
 import {FileUploader} from 'react-drag-drop-files';
@@ -8,6 +8,9 @@ import classNames from 'classnames';
 import AppSpinner from '../spinner/AppSpinner';
 import {getContentType, getExtension, getFileNameWithoutExtension} from '../util/filePathUtils';
 import {Storage} from 'aws-amplify';
+import pl from 'date-fns/locale/pl';
+
+registerLocale('pl', pl);
 
 const UploadView: React.FC = () => {
   const fileTypes = ['PDF', 'JPG', 'PNG', 'HEIC', 'JPEG'];

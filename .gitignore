@@ -16,6 +16,7 @@ infrastructure/.terraform/
 infrastructure/*.tfstate*
 infrastructure/*.tfvars
 infrastructure/*.lock*
+infrastructure/**/*.zip
 
 # misc
 .idea
