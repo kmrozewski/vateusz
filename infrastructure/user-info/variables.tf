@@ -19,12 +19,6 @@ variable region {
   default     = "eu-west-1"
 }
 
-variable profile {
-  type        = string
-  description = "AWS profile name stored in ~/.aws/config"
-  default     = "personal"
-}
-
 variable level {
   type        = string
   description = "Environment level e.g. dev/test/prod"

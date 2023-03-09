@@ -8,12 +8,6 @@ variable domain {
   description = "Domain name"
 }
 
-variable profile {
-  type        = string
-  description = "AWS profile name stored in ~/.aws/config"
-  default     = "personal"
-}
-
 variable region {
   type        = string
   description = "App region"

@@ -18,13 +18,11 @@ terraform {
 
 provider aws {
   region  = var.region
-  profile = var.profile
 }
 
 provider aws {
   alias   = "acm"
   region  = var.acm_region
-  profile = var.profile
 }
 
 module static_site {
@@ -32,7 +30,6 @@ module static_site {
 
   app_name = var.app_name
   domain   = var.domain
-  profile  = var.profile
 
   region = var.region
   level  = var.level
@@ -51,7 +48,6 @@ module dev_static_site {
 
   app_name = "${var.level}-${var.app_name}"
   domain   = "${var.level}.${var.domain}"
-  profile  = var.profile
 
   region = var.region
   level  = var.level
