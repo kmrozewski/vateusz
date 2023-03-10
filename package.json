@@ -78,6 +78,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "identity-obj-proxy": "^3.0.0",
+    "msw": "^1.1.0",
     "prettier": "^2.8.2",
     "ts-node": "^10.9.1"
   }
