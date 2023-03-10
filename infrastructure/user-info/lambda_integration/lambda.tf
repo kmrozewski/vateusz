@@ -10,7 +10,7 @@ resource aws_lambda_function proxy {
   role          = aws_iam_role.proxy.arn
   runtime       = "nodejs18.x"
   architectures = ["arm64"]
-  handler       = "${var.function_path}.handler"
+  handler       = "${split("/", var.function_path)[1]}.handler"
 
   environment {
     variables = {

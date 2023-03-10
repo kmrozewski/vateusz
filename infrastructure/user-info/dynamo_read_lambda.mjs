@@ -7,7 +7,6 @@ const allowedOrigins = process.env.ALLOW_ORIGIN.split(',');
 
 export const handler = async (event) => {
   const origin = event.headers.Origin || event.headers.origin;
-  const body = JSON.parse(event.body);
   const params = {
     TableName: process.env.TABLE_NAME,
   };
