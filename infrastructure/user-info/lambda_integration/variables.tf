@@ -11,6 +11,9 @@ variable output_path {
   type = string
   description = "Output path for the lambda .zip file"
 }
+variable integration_method {
+  type = string
+}
 variable allow_origin {
   type = string
 }

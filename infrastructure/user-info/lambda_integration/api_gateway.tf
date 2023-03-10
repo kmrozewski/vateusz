@@ -1,5 +1,5 @@
 resource aws_api_gateway_method proxy {
-  http_method   = "POST"
+  http_method   = var.integration_method
   authorization = "COGNITO_USER_POOLS"
   authorizer_id = var.authorizer_id
   resource_id   = var.resource_id
