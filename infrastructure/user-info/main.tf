@@ -24,6 +24,7 @@ module post_user_info {
   authorizer_id             = aws_api_gateway_authorizer.proxy.id
   api_gateway_execution_arn = aws_api_gateway_rest_api.proxy.execution_arn
 
+  integration_method = "POST"
   function_name = "${var.app_name}-add-new-user-data"
   function_path = "${path.module}/dynamo_write_lambda"
   output_path   = "${path.module}/post"
@@ -48,6 +49,7 @@ module get_user_info {
   authorizer_id             = aws_api_gateway_authorizer.proxy.id
   api_gateway_execution_arn = aws_api_gateway_rest_api.proxy.execution_arn
 
+  integration_method = "GET"
   function_name = "${var.app_name}-get-new-user-data"
   function_path = "${path.module}/dynamo_read_lambda"
   output_path   = "${path.module}/get"
