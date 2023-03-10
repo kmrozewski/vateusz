@@ -24,3 +24,9 @@ variable level {
   type = string
   description = "Environment level e.g. dev/test/prod"
 }
+
+variable profile {
+  type = string
+  description = "AWS profile name in ~/.aws/credentials"
+  default = "default"
+}

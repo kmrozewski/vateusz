@@ -18,11 +18,13 @@ terraform {
 
 provider aws {
   region  = var.region
+  profile = var.profile
 }
 
 provider aws {
   alias   = "acm"
   region  = var.acm_region
+  profile = var.profile
 }
 
 module static_site {
