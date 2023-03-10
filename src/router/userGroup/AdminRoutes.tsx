@@ -2,7 +2,7 @@ import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {format} from 'date-fns';
 
-const AdminView = React.lazy(() => import('../admin/AdminView'));
+const AdminView = React.lazy(() => import('../../invoice/InvoiceAdminView'));
 
 const AdminRoutes: React.FC = () => {
   const now = new Date();

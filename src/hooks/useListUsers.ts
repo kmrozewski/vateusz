@@ -1,35 +1,32 @@
 import {useEffect, useState} from 'react';
-import {Storage} from 'aws-amplify';
+import {useApiClient, USERS_ENDPOINT} from './useApiClient';
 
 export interface IUser {
   identityId: string;
   name: string;
+  groups: string;
+}
+
+interface IResponse {
+  Items: IUser[];
 }
 
 export const useListUsers = (): [IUser[], boolean] => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const parse = async (blob: Blob): Promise<IUser[]> => {
-    try {
-      const data = await new Blob([blob]);
-      const text = await data.text();
-      return JSON.parse(text);
-    } catch {
-      console.error('Failed to fetch users');
-      return users;
-    }
-  };
+  const client = useApiClient();
 
   const getUsers = async () => {
-    setLoading(true);
-    const response = await Storage.get('users.json', {level: 'private', download: true});
-
-    if (response && response.Body) {
-      const data = await parse(response.Body as Blob);
-      setUsers(data);
+    try {
+      setLoading(true);
+      const response = await client.call<IResponse>({method: 'GET', endpoint: USERS_ENDPOINT});
+      const items = 'Items' in response ? (response.Items as IUser[]) : [];
+      setUsers(items);
+    } catch (err) {
+      setUsers([]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom';
 
-const UploadView = React.lazy(() => import('../upload/UploadView'));
-const InvoiceView = React.lazy(() => import('../invoice/InvoiceView'));
+const UploadView = React.lazy(() => import('../../upload/UploadView'));
+const InvoiceView = React.lazy(() => import('../../invoice/InvoiceUserView'));
 
 const UserRoutes: React.FC = () => {
   return (

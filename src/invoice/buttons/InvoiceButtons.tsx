@@ -17,11 +17,11 @@ interface IProps {
   showRemoveModal: IShowModal<IModal>;
 }
 
-const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameModal, showRemoveModal}) => {
+const InvoiceButtons: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameModal, showRemoveModal}) => {
   const [url, setUrl] = useState('');
   const identityId = useIdentityId();
   const {breakpoint} = useBreakpoint(breakpoints, 'desktop');
-  const {download, rename, renameShort, remove} = t.invoice.table.actions;
+  const {download, rename, renameShort, remove} = t.invoice.table.buttons;
 
   const getFile = async () => {
     const downloadUrl = await Storage.get(s3Key, {level: 'protected', identityId});
@@ -51,4 +51,4 @@ const InvoiceActions: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameMo
   );
 };
 
-export default InvoiceActions;
+export default InvoiceButtons;

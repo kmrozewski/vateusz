@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import t from '../i18n/translations';
 import {useListUsers} from '../hooks/useListUsers';
-import InvoiceView from '../invoice/InvoiceView';
+import InvoiceUserView from './InvoiceUserView';
 import {ListGroup} from 'react-bootstrap';
-import IdentityIdProvider from './IdentityIdProvider';
+import IdentityIdProvider from '../context/IdentityIdProvider';
 
-const AdminView: React.FC = () => {
+const InvoiceAdminView: React.FC = () => {
   const [users, loading] = useListUsers();
   const [identityId, setIdentityId] = useState<string>();
 
@@ -29,10 +29,10 @@ const AdminView: React.FC = () => {
         ))}
       </ListGroup>
       <IdentityIdProvider identityId={identityId}>
-        <InvoiceView identityId={identityId} />
+        <InvoiceUserView identityId={identityId} />
       </IdentityIdProvider>
     </>
   );
 };
 
-export default AdminView;
+export default InvoiceAdminView;

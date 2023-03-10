@@ -55,17 +55,17 @@ describe('<InvoiceTable/>', () => {
     jest.spyOn(useCognitoGroupHook, 'useCognitoGroup').mockReturnValue([true, false]);
     renderWithAuth(<InvoiceTable {...mocks} invoices={invoices} />);
 
-    expect(await screen.findAllByText(t.invoice.table.actions.download)).toHaveLength(2);
-    expect(await screen.findAllByText(t.invoice.table.actions.rename)).toHaveLength(2);
-    expect(await screen.findAllByText(t.invoice.table.actions.remove)).toHaveLength(2);
+    expect(await screen.findAllByText(t.invoice.table.buttons.download)).toHaveLength(2);
+    expect(await screen.findAllByText(t.invoice.table.buttons.rename)).toHaveLength(2);
+    expect(await screen.findAllByText(t.invoice.table.buttons.remove)).toHaveLength(2);
   });
 
   it('cognito group admin has correct actions available', async () => {
     jest.spyOn(useCognitoGroupHook, 'useCognitoGroup').mockReturnValue([false, true]);
     renderWithAuth(<InvoiceTable {...mocks} invoices={invoices} />);
 
-    expect(await screen.findAllByText(t.invoice.table.actions.download)).toHaveLength(2);
-    expect(screen.queryByText(t.invoice.table.actions.rename)).not.toBeInTheDocument();
-    expect(screen.queryByText(t.invoice.table.actions.remove)).not.toBeInTheDocument();
+    expect(await screen.findAllByText(t.invoice.table.buttons.download)).toHaveLength(2);
+    expect(screen.queryByText(t.invoice.table.buttons.rename)).not.toBeInTheDocument();
+    expect(screen.queryByText(t.invoice.table.buttons.remove)).not.toBeInTheDocument();
   });
 });
