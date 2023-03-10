@@ -2,7 +2,7 @@ import React from 'react';
 import {Table} from 'react-bootstrap';
 import t from '../../i18n/translations';
 import {Invoice} from '../../hooks/useInvoices';
-import InvoiceActions from '../container/InvoiceActions';
+import InvoiceButtons from '../buttons/InvoiceButtons';
 import {useCognitoGroup} from '../../hooks/useCognitoGroup';
 import {IModal} from '../modal/RemoveModal';
 import {IRenameModal} from '../modal/RenameModal';
@@ -38,7 +38,7 @@ const InvoiceTable: React.FC<IProps> = ({invoices, showRenameModal, showRemoveMo
               <td>{invoice.fileSize}</td>
               <td>{invoice.lastUpdated}</td>
               <td>
-                <InvoiceActions
+                <InvoiceButtons
                   s3Key={invoice.s3Key}
                   fileName={invoice.fileName}
                   isUser={isUser}

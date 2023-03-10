@@ -29,7 +29,7 @@ const translations = {
         fileSize: 'Rozmiar',
         actions: 'Akcje',
       },
-      actions: {
+      buttons: {
         download: 'Pobierz',
         rename: 'Zmień nazwę',
         renameShort: 'Zmień',

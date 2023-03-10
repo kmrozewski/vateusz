@@ -4,7 +4,7 @@ import {Invoice} from '../../hooks/useInvoices';
 import {IShowModal} from '../table/InvoiceTable';
 import {IRenameModal} from '../modal/RenameModal';
 import {IModal} from '../modal/RemoveModal';
-import InvoiceActions from '../container/InvoiceActions';
+import InvoiceButtons from '../buttons/InvoiceButtons';
 import {useCognitoGroup} from '../../hooks/useCognitoGroup';
 
 interface IProps {
@@ -23,7 +23,7 @@ const InvoiceCard: React.FC<IProps> = ({invoice, showRenameModal, showRemoveModa
           <span>{invoice.fileSize}</span>
         </Card.Text>
       </Card.Body>
-      <InvoiceActions
+      <InvoiceButtons
         s3Key={invoice.s3Key}
         fileName={invoice.fileName}
         isUser={isUser}
