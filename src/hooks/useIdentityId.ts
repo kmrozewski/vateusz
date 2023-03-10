@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {IdentityIdContext} from '../admin/IdentityIdProvider';
+import {IdentityIdContext} from '../context/IdentityIdProvider';
 
 export const useIdentityId = (): string | undefined => {
   const context = useContext(IdentityIdContext);

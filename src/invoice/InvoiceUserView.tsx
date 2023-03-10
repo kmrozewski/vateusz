@@ -17,7 +17,7 @@ interface IProps {
 
 registerLocale('pl', pl);
 
-const InvoiceView: React.FC<IProps> = ({identityId}) => {
+const InvoiceUserView: React.FC<IProps> = ({identityId}) => {
   const now = new Date();
   const navigate = useNavigate();
   const [user] = useCognitoGroup();
@@ -50,4 +50,4 @@ const InvoiceView: React.FC<IProps> = ({identityId}) => {
   );
 };
 
-export default InvoiceView;
+export default InvoiceUserView;
