@@ -2,10 +2,10 @@ import React, {Suspense} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@aws-amplify/ui-react/styles.css';
-import AppRouter from './router/AppRouter';
+import AppRouter from './routes/AppRouter';
 import {Authenticator, translations} from '@aws-amplify/ui-react';
 import {Amplify, I18n} from 'aws-amplify';
-import AppSpinner from './spinner/AppSpinner';
+import AppSpinner from './components/spinner/AppSpinner';
 import './App.scss';
 
 Amplify.configure({

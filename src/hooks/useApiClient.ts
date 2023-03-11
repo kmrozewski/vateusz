@@ -1,12 +1,6 @@
 import {Auth} from 'aws-amplify';
 import {useCallback} from 'react';
-
-export interface IRequest {
-  endpoint: string;
-  method: string;
-  body?: string;
-  token?: string;
-}
+import {IRequest} from '../types/IRequest';
 
 export const USERS_ENDPOINT = '/users';
 

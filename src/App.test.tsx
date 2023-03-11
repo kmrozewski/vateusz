@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './App';
-import {renderWithAuth} from './util/renderUtils';
+import {renderWithAuth} from './utils/renderUtils';
 import {screen, waitFor} from '@testing-library/react';
 
 describe('<App/>', () => {

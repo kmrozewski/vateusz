@@ -2,22 +2,16 @@ import {useCallback, useEffect, useState} from 'react';
 import {Storage} from 'aws-amplify';
 import bytes from 'bytes';
 import {format} from 'date-fns';
+import {IInvoice} from '../types/IInvoice';
 
-export interface Invoice {
-  s3Key: string;
-  fileName: string;
-  fileSize: string;
-  lastUpdated: string;
-}
-
-export interface IUseInvoices {
-  invoices: Invoice[];
+interface IUseInvoices {
+  invoices: IInvoice[];
   refetch: () => Promise<void>;
   loading: boolean;
 }
 
 export const useInvoices = (invoicesDirectory: string, identityId?: string): IUseInvoices => {
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [invoices, setInvoices] = useState<IInvoice[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchInvoices = useCallback(async (invoicesDirectory: string, identityId?: string) => {

@@ -1,11 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useApiClient, USERS_ENDPOINT} from './useApiClient';
-
-export interface IUser {
-  identityId: string;
-  name: string;
-  groups: string;
-}
+import {IUser} from '../types/IUser';
 
 export const useListUsers = (): [IUser[], boolean] => {
   const [users, setUsers] = useState<IUser[]>([]);
