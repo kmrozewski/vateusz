@@ -7,10 +7,6 @@ export interface IUser {
   groups: string;
 }
 
-interface IResponse {
-  Items: IUser[];
-}
-
 export const useListUsers = (): [IUser[], boolean] => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [loading, setLoading] = useState(false);
@@ -19,9 +15,9 @@ export const useListUsers = (): [IUser[], boolean] => {
   const getUsers = async () => {
     try {
       setLoading(true);
-      const response = await client.call<IResponse>({method: 'GET', endpoint: USERS_ENDPOINT});
+      const response = await client.call({method: 'GET', endpoint: USERS_ENDPOINT});
       const items = 'Items' in response ? (response.Items as IUser[]) : [];
-      setUsers(items);
+      setUsers(items.filter(user => !user.groups.includes('admin')));
     } catch (err) {
       setUsers([]);
     } finally {

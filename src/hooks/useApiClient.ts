@@ -27,7 +27,7 @@ export const useApiClient = () => {
     return session.getIdToken().getJwtToken();
   }, []);
 
-  const call = useCallback(async <T>({method, endpoint, body, token}: IRequest) => {
+  const call = useCallback(async ({method, endpoint, body, token}: IRequest) => {
     const jwtToken = token ? token : await getToken();
     const response = await fetch(baseUrl + endpoint, {
       method,
