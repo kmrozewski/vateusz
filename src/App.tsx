@@ -6,6 +6,9 @@ import AppRouter from './routes/AppRouter';
 import {Authenticator, translations} from '@aws-amplify/ui-react';
 import {Amplify, I18n} from 'aws-amplify';
 import AppSpinner from './components/spinner/AppSpinner';
+import {CssBaseline, PaletteMode} from '@mui/material';
+import PaletteProvider from './providers/PaletteProvider';
+import {useLocalStorage} from './hooks/useLocalStorage';
 import './App.scss';
 
 Amplify.configure({
@@ -28,11 +31,16 @@ I18n.putVocabularies(translations);
 I18n.setLanguage('pl');
 
 const App: React.FC = () => {
+  const [mode, setMode] = useLocalStorage<PaletteMode>('palette', 'light');
+
   return (
     <Authenticator.Provider>
-      <Suspense fallback={<AppSpinner />}>
-        <AppRouter />
-      </Suspense>
+      <PaletteProvider mode={mode} setMode={setMode}>
+        <CssBaseline />
+        <Suspense fallback={<AppSpinner />}>
+          <AppRouter />
+        </Suspense>
+      </PaletteProvider>
     </Authenticator.Provider>
   );
 };

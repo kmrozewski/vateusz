@@ -16,7 +16,7 @@ const translations = {
       offcanvasAriaLabel: '',
     },
     pages: {
-      home: 'Dodaj plik',
+      upload: 'Dodaj plik',
       invoices: 'Faktury',
     },
   },
