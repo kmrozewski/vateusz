@@ -8,8 +8,8 @@ export const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T)
     }
 
     try {
-      const item = window.localStorage.getItem(key);
-      return (item as T) ?? initialValue;
+      const item = window.localStorage.getItem(key) ?? '';
+      return (JSON.parse(item) as T) ?? initialValue;
     } catch (error) {
       return initialValue;
     }
