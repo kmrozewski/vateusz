@@ -32,7 +32,7 @@ const InvoiceTable: React.FC<IProps> = ({invoices, showRenameModal, showRemoveMo
         <TableBody>
           {invoices.map((invoice, index) => (
             <TableRow key={invoice.s3Key} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-              <TableCell>{index}</TableCell>
+              <TableCell>{index + 1}</TableCell>
               <TableCell>{invoice.fileName}</TableCell>
               <TableCell>{invoice.fileSize}</TableCell>
               <TableCell>{invoice.lastUpdated}</TableCell>

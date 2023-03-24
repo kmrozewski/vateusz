@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import t from '../../../assets/translations';
-import {Button} from 'react-bootstrap';
 import {Storage} from 'aws-amplify';
 import {useIdentityId} from '../../../hooks/useIdentityId';
 import {IShowModal} from '../table/InvoiceTable';
-import useBreakpoint from 'use-breakpoint';
-import {breakpoints} from '../../../components/breakpoint/Mobile';
 import {IModal, IRenameModal} from '../../../types/IModal';
+import {Button, IconButton, Tooltip} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 
 interface IProps {
   s3Key: string;
@@ -19,8 +20,7 @@ interface IProps {
 const InvoiceButtons: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameModal, showRemoveModal}) => {
   const [url, setUrl] = useState('');
   const identityId = useIdentityId();
-  const {breakpoint} = useBreakpoint(breakpoints, 'desktop');
-  const {download, rename, renameShort, remove} = t.invoice.table.buttons;
+  const {download, rename, remove} = t.invoice.table.buttons;
 
   const getFile = async () => {
     const downloadUrl = await Storage.get(s3Key, {level: 'protected', identityId});
@@ -32,19 +32,25 @@ const InvoiceButtons: React.FC<IProps> = ({s3Key, fileName, isUser, showRenameMo
   }, [s3Key]);
 
   return (
-    <div className="invoice-actions__contianer">
-      <a href={url} target="_blank" rel="noreferrer noopener" className="btn btn-outline-primary">
-        {download}
-      </a>
+    <div className="invoice-actions__container">
+      <Tooltip title={download}>
+        <IconButton href={url} target="_blank" rel="noreferrer noopener">
+          <CloudDownloadIcon />
+        </IconButton>
+      </Tooltip>
       {isUser ? (
-        <Button className="mx-3" variant="outline-success" onClick={() => showRenameModal({s3Key, fileName, show: true})}>
-          {breakpoint === 'mobile' ? renameShort : rename}
-        </Button>
+        <Tooltip title={rename}>
+          <IconButton onClick={() => showRenameModal({s3Key, fileName, show: true})}>
+            <DriveFileRenameOutlineIcon />
+          </IconButton>
+        </Tooltip>
       ) : null}
       {isUser ? (
-        <Button variant="outline-danger" onClick={() => showRemoveModal({s3Key, show: true})}>
-          {remove}
-        </Button>
+        <Tooltip title={remove}>
+          <IconButton onClick={() => showRemoveModal({s3Key, show: true})}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       ) : null}
     </div>
   );

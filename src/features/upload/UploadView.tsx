@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import AppSpinner from '../../components/spinner/AppSpinner';
 import {getContentType, getExtension, getFileNameWithoutExtension} from '../../utils/filePathUtils';
 import {Storage} from 'aws-amplify';
-import {DatePicker} from '@mui/x-date-pickers';
+import {MobileDatePicker} from '@mui/x-date-pickers';
 
 const UploadView: React.FC = () => {
   const fileTypes = ['PDF', 'JPG', 'PNG', 'HEIC', 'JPEG'];
@@ -43,7 +43,7 @@ const UploadView: React.FC = () => {
   return (
     <div className="upload-view">
       <div className="date-picker">
-        <DatePicker
+        <MobileDatePicker
           sx={{width: '100%', marginBottom: '8px', marginTop: '12px'}}
           views={['month', 'year']}
           label={t.datePicker.selectMonth}
