@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table} from 'react-bootstrap';
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
 import t from '../../../assets/translations';
 import InvoiceButtons from '../buttons/InvoiceButtons';
 import {useCognitoGroup} from '../../../hooks/useCognitoGroup';
@@ -18,25 +18,25 @@ const InvoiceTable: React.FC<IProps> = ({invoices, showRenameModal, showRemoveMo
   const [isUser] = useCognitoGroup();
 
   return (
-    <>
-      <Table className="mt-2" striped bordered hover>
-        <thead>
-          <tr>
-            <th>{t.invoice.table.headers.id}</th>
-            <th>{t.invoice.table.headers.name}</th>
-            <th>{t.invoice.table.headers.fileSize}</th>
-            <th>{t.invoice.table.headers.lastUpdated}</th>
-            <th>{t.invoice.table.headers.actions}</th>
-          </tr>
-        </thead>
-        <tbody>
+    <TableContainer component={Paper}>
+      <Table aria-label="simple-table">
+        <TableHead>
+          <TableRow>
+            <TableCell>{t.invoice.table.headers.id}</TableCell>
+            <TableCell>{t.invoice.table.headers.name}</TableCell>
+            <TableCell>{t.invoice.table.headers.fileSize}</TableCell>
+            <TableCell>{t.invoice.table.headers.lastUpdated}</TableCell>
+            <TableCell>{t.invoice.table.headers.actions}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {invoices.map((invoice, index) => (
-            <tr key={invoice.s3Key}>
-              <td>{index}</td>
-              <td>{invoice.fileName}</td>
-              <td>{invoice.fileSize}</td>
-              <td>{invoice.lastUpdated}</td>
-              <td>
+            <TableRow key={invoice.s3Key} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+              <TableCell>{index}</TableCell>
+              <TableCell>{invoice.fileName}</TableCell>
+              <TableCell>{invoice.fileSize}</TableCell>
+              <TableCell>{invoice.lastUpdated}</TableCell>
+              <TableCell>
                 <InvoiceButtons
                   s3Key={invoice.s3Key}
                   fileName={invoice.fileName}
@@ -44,12 +44,12 @@ const InvoiceTable: React.FC<IProps> = ({invoices, showRenameModal, showRemoveMo
                   showRenameModal={showRenameModal}
                   showRemoveModal={showRemoveModal}
                 />
-              </td>
-            </tr>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
+        </TableBody>
       </Table>
-    </>
+    </TableContainer>
   );
 };
 
