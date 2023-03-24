@@ -1,5 +1,6 @@
 import React, {createContext, PropsWithChildren} from 'react';
 import {createTheme, PaletteMode, ThemeProvider} from '@mui/material';
+import {plPL} from '@mui/material/locale';
 
 interface IProps {
   mode: PaletteMode;
@@ -11,11 +12,14 @@ type Props = IProps & PropsWithChildren;
 export const PaletteContext = createContext<IProps>({mode: 'light', setMode: undefined});
 
 const PaletteProvider: React.FC<Props> = ({mode, setMode, children}) => {
-  const palette = createTheme({
-    palette: {
-      mode,
+  const palette = createTheme(
+    {
+      palette: {
+        mode,
+      },
     },
-  });
+    plPL
+  );
 
   return (
     <PaletteContext.Provider value={{mode, setMode}}>

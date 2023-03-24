@@ -1,6 +1,5 @@
 import React, {Suspense} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-datepicker/dist/react-datepicker.css';
 import '@aws-amplify/ui-react/styles.css';
 import AppRouter from './routes/AppRouter';
 import {Authenticator, translations} from '@aws-amplify/ui-react';
@@ -9,6 +8,9 @@ import AppSpinner from './components/spinner/AppSpinner';
 import {CssBaseline, PaletteMode} from '@mui/material';
 import PaletteProvider from './providers/PaletteProvider';
 import {useLocalStorage} from './hooks/useLocalStorage';
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import pl from 'date-fns/locale/pl';
 import './App.scss';
 
 Amplify.configure({
@@ -35,12 +37,14 @@ const App: React.FC = () => {
 
   return (
     <Authenticator.Provider>
-      <PaletteProvider mode={mode} setMode={setMode}>
-        <CssBaseline />
-        <Suspense fallback={<AppSpinner />}>
-          <AppRouter />
-        </Suspense>
-      </PaletteProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={pl}>
+        <PaletteProvider mode={mode} setMode={setMode}>
+          <CssBaseline />
+          <Suspense fallback={<AppSpinner />}>
+            <AppRouter />
+          </Suspense>
+        </PaletteProvider>
+      </LocalizationProvider>
     </Authenticator.Provider>
   );
 };

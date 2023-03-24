@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {addYears, format, subYears} from 'date-fns';
-import DatePicker, {registerLocale} from 'react-datepicker';
 import t from '../../assets/translations';
 import './UploadView.scss';
 import {FileUploader} from 'react-drag-drop-files';
@@ -8,9 +7,7 @@ import classNames from 'classnames';
 import AppSpinner from '../../components/spinner/AppSpinner';
 import {getContentType, getExtension, getFileNameWithoutExtension} from '../../utils/filePathUtils';
 import {Storage} from 'aws-amplify';
-import pl from 'date-fns/locale/pl';
-
-registerLocale('pl', pl);
+import {DatePicker} from '@mui/x-date-pickers';
 
 const UploadView: React.FC = () => {
   const fileTypes = ['PDF', 'JPG', 'PNG', 'HEIC', 'JPEG'];
@@ -45,16 +42,18 @@ const UploadView: React.FC = () => {
 
   return (
     <div className="upload-view">
-      <h2>{t.datePicker.selectMonth}</h2>
       <div className="date-picker">
         <DatePicker
-          selected={date}
-          onChange={(date: Date) => setDate(date)}
-          dateFormat="yyyy-MM"
-          locale="pl"
+          sx={{width: '100%', marginBottom: '8px', marginTop: '12px'}}
+          views={['month', 'year']}
+          label={t.datePicker.selectMonth}
           minDate={subYears(today, 2)}
           maxDate={addYears(today, 1)}
-          showMonthYearPicker
+          format="yyyy-MM"
+          defaultValue={today}
+          onChange={date => setDate(date ?? today)}
+          closeOnSelect
+          disableHighlightToday
         />
       </div>
       <div className={classNames('mt-2', 'upload-view__uploader')}>

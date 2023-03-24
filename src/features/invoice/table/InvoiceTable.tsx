@@ -19,7 +19,7 @@ const InvoiceTable: React.FC<IProps> = ({invoices, showRenameModal, showRemoveMo
 
   return (
     <TableContainer component={Paper}>
-      <Table aria-label="simple-table">
+      <Table aria-label="simplpackage.je-table">
         <TableHead>
           <TableRow>
             <TableCell>{t.invoice.table.headers.id}</TableCell>
