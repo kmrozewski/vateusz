@@ -44,7 +44,7 @@ const UploadView: React.FC = () => {
     <div className="upload-view">
       <div className="date-picker">
         <MobileDatePicker
-          sx={{width: '100%', marginBottom: '8px', marginTop: '12px'}}
+          sx={{width: '100%', marginBottom: '8px'}}
           views={['month', 'year']}
           label={t.datePicker.selectMonth}
           minDate={subYears(today, 2)}

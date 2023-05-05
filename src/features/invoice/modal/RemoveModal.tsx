@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button, Modal} from 'react-bootstrap';
 import t from '../../../assets/translations';
 import {Storage} from 'aws-amplify';
 import {IModal} from '../../../types/IModal';
+import {Box, Button, Card, CardActions, CardContent, Modal, Typography} from '@mui/material';
 
 interface IProps {
   onClose: () => void;
@@ -18,19 +18,32 @@ const RemoveModal: React.FC<Props> = ({s3Key, show, onClose}) => {
   };
 
   return (
-    <Modal show={show} backdrop={'static'} onHide={() => onClose()}>
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{description}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="outline-secondary" className="w-50" onClick={() => onClose()}>
-          {close}
-        </Button>
-        <Button variant={'outline-danger'} className="w-25" onClick={remove}>
-          {ok}
-        </Button>
-      </Modal.Footer>
+    <Modal open={show} onClose={onClose}>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '25%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 320,
+        }}>
+        <Card>
+          <CardContent>
+            <Typography id="rename-modal__title" variant="h6" component="h2" sx={{mb: '12px'}}>
+              {title}
+            </Typography>
+            <Typography>{description}</Typography>
+          </CardContent>
+          <CardActions>
+            <Button variant="contained" onClick={onClose}>
+              {close}
+            </Button>
+            <Button variant="outlined" color="error" onClick={remove}>
+              {ok}
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
     </Modal>
   );
 };
