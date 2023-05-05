@@ -20,12 +20,12 @@ const InvoiceUserView: React.FC<IProps> = ({identityId}) => {
   const [user] = useCognitoGroup();
   const {year = format(now, 'yyyy'), month = format(now, 'MM')} = useParams();
   const invoicesDirectory = year + '-' + month;
-  const {invoices, loading, refetch} = useInvoices(invoicesDirectory, identityId);
+  const {invoices, loading, reFetch} = useInvoices(invoicesDirectory, identityId);
   const today = parse(invoicesDirectory, 'yyyy-MM', now);
   const path = user ? '/invoices/' : '/admin/';
 
   useEffect(() => {
-    refetch();
+    reFetch();
   }, [path, year, month]);
 
   return (
@@ -44,7 +44,7 @@ const InvoiceUserView: React.FC<IProps> = ({identityId}) => {
           closeOnSelect
           disableHighlightToday
         />
-        {loading ? <AppSpinner className="invoice-view__spinner" /> : <InvoiceContainer invoices={invoices} fetchInvoices={refetch} />}
+        {loading ? <AppSpinner /> : <InvoiceContainer invoices={invoices} fetchInvoices={reFetch} />}
       </div>
     </>
   );

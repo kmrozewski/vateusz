@@ -1,5 +1,4 @@
 import React, {Suspense} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '@aws-amplify/ui-react/styles.css';
 import AppRouter from './routes/AppRouter';
 import {Authenticator, translations} from '@aws-amplify/ui-react';

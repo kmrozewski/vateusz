@@ -4,7 +4,7 @@ import {Storage} from 'aws-amplify';
 import {useIdentityId} from '../../../hooks/useIdentityId';
 import {IShowModal} from '../table/InvoiceTable';
 import {IModal, IRenameModal} from '../../../types/IModal';
-import {Button, IconButton, Tooltip} from '@mui/material';
+import {IconButton, Tooltip} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
