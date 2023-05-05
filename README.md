@@ -30,7 +30,7 @@ See more in the [Infrastructure](./infrastructure/) section.
 ### Project
 * Run `npm install` to install dependencies
 * Copy `.env.local.example` as `.env.local`
-* Copy `.env.local.example` as `.env.production.local` for separate environment
+* Copy `.env.local.example` as `.env.production.local` or `.env.development.local` for separate environment
 
 ## Available Scripts
 
