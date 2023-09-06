@@ -62,6 +62,13 @@ const translations = {
     selected: 'Aktualnie wybrany użytkownik',
     empty: 'Brak użytkowników do wyświetlenia',
   },
+  calculator: {
+    title: 'Kalkulator miniratki',
+    rate: 'Oprocentowanie kredytu (%)',
+    times: 'Liczba pozostałych rat',
+    presentValue: 'Pozostała kwota do spłaty (zł)',
+    result: 'Twoja miniratka: ',
+  },
 };
 
 export default translations;
