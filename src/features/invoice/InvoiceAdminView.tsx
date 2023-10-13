@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import t from '../../assets/translations';
 import {useListUsers} from '../../hooks/useListUsers';
 import InvoiceUserView from './InvoiceUserView';
-import {ListGroup} from 'react-bootstrap';
 import IdentityIdProvider from '../../providers/IdentityIdProvider';
+import {List, ListItem, ListItemButton, ListItemText, Typography} from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 
 const InvoiceAdminView: React.FC = () => {
   const [users, loading] = useListUsers();
@@ -20,14 +21,19 @@ const InvoiceAdminView: React.FC = () => {
 
   return (
     <>
-      <h2>{t.admin.title}</h2>
-      <ListGroup className="mt-3 mb-3">
+      <Typography variant="h4" component="h2" sx={{mt: '16px'}}>
+        {t.admin.title}
+      </Typography>
+      <List component="div" sx={{mt: '12px', mb: '12px'}}>
         {users.map(user => (
-          <ListGroup.Item key={user.identityId} active={user.identityId === identityId} onClick={() => setIdentityId(user.identityId)}>
-            {user.name}
-          </ListGroup.Item>
+          <ListItem key={user.identityId} disablePadding>
+            <ListItemButton selected={user.identityId === identityId} onClick={() => setIdentityId(user.identityId)}>
+              <PersonIcon sx={{mr: '8px'}} />
+              <ListItemText primary={user.name} />
+            </ListItemButton>
+          </ListItem>
         ))}
-      </ListGroup>
+      </List>
       <IdentityIdProvider identityId={identityId}>
         <InvoiceUserView identityId={identityId} />
       </IdentityIdProvider>

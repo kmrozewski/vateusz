@@ -6,7 +6,7 @@ import {IInvoice} from '../types/IInvoice';
 
 interface IUseInvoices {
   invoices: IInvoice[];
-  refetch: () => Promise<void>;
+  reFetch: () => Promise<void>;
   loading: boolean;
 }
 
@@ -37,5 +37,5 @@ export const useInvoices = (invoicesDirectory: string, identityId?: string): IUs
     fetchInvoices(invoicesDirectory, identityId);
   }, [fetchInvoices, identityId]);
 
-  return {invoices, loading, refetch: () => fetchInvoices(invoicesDirectory, identityId)};
+  return {invoices, loading, reFetch: () => fetchInvoices(invoicesDirectory, identityId)};
 };

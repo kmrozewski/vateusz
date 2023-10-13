@@ -1,28 +1,11 @@
 .invoice-actions {
-  &__contianer {
+  &__container {
     display: flex;
     justify-content: space-between;
     padding: 0 16px 16px 16px;
   }
 }
 
-.invoice-card {
-  &__text {
-    display: flex;
-    justify-content: space-between;
-  }
-}
-
 .invoice-view {
-  .react-datepicker {
-    margin-top: -2px;
-
-    &__triangle {
-      display: none;
-    }
-  }
-
-  & input {
-    width: 100%;
-  }
+  margin-top: 16px;
 }

@@ -1,9 +1,9 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Button, Form, Modal} from 'react-bootstrap';
 import t from '../../../assets/translations';
 import {Storage} from 'aws-amplify';
 import {getExtension, getFileNameWithoutExtension} from '../../../utils/filePathUtils';
 import {IRenameModal} from '../../../types/IModal';
+import {Box, Button, Card, CardActions, CardContent, Modal, TextField, Typography} from '@mui/material';
 
 interface IProps {
   onClose: () => void;
@@ -47,27 +47,38 @@ const RenameModal: React.FC<Props> = ({s3Key, fileName, show, onClose}) => {
   };
 
   return (
-    <Modal show={show} backdrop={'static'} onHide={() => onClose()}>
-      <Modal.Header closeButton>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group>
-            <Form.Label>{description}</Form.Label>
-            <Form.Control type="input" value={name} onChange={e => setName(e.target.value)} />
-            {!available && <Form.Control.Feedback type="invalid">{t.invoice.rename.availability}</Form.Control.Feedback>}
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="outline-secondary" onClick={() => onClose()}>
-          {close}
-        </Button>
-        <Button variant={valid ? 'outline-primary' : 'outline-warning'} onClick={() => handleSave()} disabled={!valid}>
-          {save}
-        </Button>
-      </Modal.Footer>
+    <Modal open={show} onClose={onClose} aria-labelledby="rename-modal__title">
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '25%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 320,
+        }}>
+        <Card>
+          <CardContent>
+            <Typography id="rename-modal__title" variant="h6" component="h2" sx={{mb: '12px'}}>
+              {title}
+            </Typography>
+            <TextField
+              label={available ? description : t.invoice.rename.availability}
+              value={name}
+              onChange={e => setName(e.target.value)}
+              error={!available}
+              fullWidth
+            />
+          </CardContent>
+          <CardActions sx={{padding: '16px'}}>
+            <Button variant="contained" onClick={onClose}>
+              {close}
+            </Button>
+            <Button variant={valid ? 'outlined' : 'outlined'} onClick={() => handleSave()} disabled={!valid}>
+              {save}
+            </Button>
+          </CardActions>
+        </Card>
+      </Box>
     </Modal>
   );
 };

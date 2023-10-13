@@ -75,7 +75,7 @@ describe('<RenameModal/>', () => {
     // user submits modal
     await user.click(screen.getByRole('button', {name: t.invoice.rename.save}));
 
-    expect(screen.getByText(t.invoice.rename.availability)).toBeInTheDocument();
+    expect(screen.getAllByText(t.invoice.rename.availability)).toHaveLength(2);
     expect(listMock).toHaveBeenCalledTimes(1);
     expect(copyMock).not.toHaveBeenCalled();
     expect(removeMock).not.toHaveBeenCalled();

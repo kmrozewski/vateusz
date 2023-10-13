@@ -1,18 +1,28 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 export const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T) => void] => {
+  const parse = useCallback((item: string, initialValue: T) => {
+    try {
+      return JSON.parse(item) as T;
+    } catch (error) {
+      return initialValue;
+    }
+  }, []);
+
   const [stored, setStored] = useState<T>(() => {
     // Fixes issues with SSR
     if (typeof window === 'undefined') {
       return initialValue;
     }
 
-    try {
-      const item = window.localStorage.getItem(key);
-      return (item as T) ?? initialValue;
-    } catch (error) {
+    const item = window.localStorage.getItem(key) ?? '';
+
+    if (item === '') {
+      window.localStorage.setItem(key, JSON.stringify(initialValue));
       return initialValue;
     }
+
+    return parse(item, initialValue);
   });
 
   const setValue = (value: T) => {

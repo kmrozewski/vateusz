@@ -1,21 +1,18 @@
 import React, {useEffect} from 'react';
 import {addYears, format, parse, subYears} from 'date-fns';
-import DatePicker, {registerLocale} from 'react-datepicker';
-import pl from 'date-fns/locale/pl';
 import t from '../../assets/translations';
 import {useNavigate, useParams} from 'react-router-dom';
-import {formatYearMonthPath} from '../../utils/dateUtils';
 import AppSpinner from '../../components/spinner/AppSpinner';
 import './Invoice.scss';
 import {useInvoices} from '../../hooks/useInvoices';
 import {useCognitoGroup} from '../../hooks/useCognitoGroup';
 import InvoiceContainer from './container/InvoiceContainer';
+import {MobileDatePicker} from '@mui/x-date-pickers';
+import {formatYearMonthPath} from '../../utils/dateUtils';
 
 interface IProps {
   identityId?: string;
 }
-
-registerLocale('pl', pl);
 
 const InvoiceUserView: React.FC<IProps> = ({identityId}) => {
   const now = new Date();
@@ -23,28 +20,31 @@ const InvoiceUserView: React.FC<IProps> = ({identityId}) => {
   const [user] = useCognitoGroup();
   const {year = format(now, 'yyyy'), month = format(now, 'MM')} = useParams();
   const invoicesDirectory = year + '-' + month;
-  const {invoices, loading, refetch} = useInvoices(invoicesDirectory, identityId);
+  const {invoices, loading, reFetch} = useInvoices(invoicesDirectory, identityId);
   const today = parse(invoicesDirectory, 'yyyy-MM', now);
   const path = user ? '/invoices/' : '/admin/';
 
   useEffect(() => {
-    refetch();
+    reFetch();
   }, [path, year, month]);
 
   return (
     <>
-      <h2>{t.datePicker.selectMonth}</h2>
       <div className="invoice-view">
-        <DatePicker
-          selected={today}
-          onChange={(date: Date) => navigate(path + formatYearMonthPath(date))}
-          dateFormat="yyyy-MM"
-          locale="pl"
+        <MobileDatePicker
+          sx={{width: '100%', marginBottom: '20px'}}
+          views={['month', 'year']}
+          label={t.datePicker.selectMonth}
           minDate={subYears(today, 2)}
           maxDate={addYears(today, 1)}
-          showMonthYearPicker
+          format="yyyy-MM"
+          monthsPerRow={4}
+          defaultValue={today}
+          onChange={date => navigate(path + formatYearMonthPath(date ?? today))}
+          closeOnSelect
+          disableHighlightToday
         />
-        {loading ? <AppSpinner className="invoice-view__spinner" /> : <InvoiceContainer invoices={invoices} fetchInvoices={refetch} />}
+        {loading ? <AppSpinner /> : <InvoiceContainer invoices={invoices} fetchInvoices={reFetch} />}
       </div>
     </>
   );

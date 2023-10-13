@@ -1,19 +1,11 @@
 import React from 'react';
-import {Spinner} from 'react-bootstrap';
-import t from '../../assets/translations';
-import classNames from 'classnames';
-import './AppSpinner.scss';
+import {Box, CircularProgress} from '@mui/material';
 
-interface IProps {
-  className?: string;
-}
-const AppSpinner: React.FC<IProps> = ({className}) => {
+const AppSpinner: React.FC = () => {
   return (
-    <div className={classNames('app-spinner__container', className)}>
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">{t.spinner.loading}</span>
-      </Spinner>
-    </div>
+    <Box sx={{padding: '8px', display: 'flex', justifyContent: 'center'}}>
+      <CircularProgress />
+    </Box>
   );
 };
 
