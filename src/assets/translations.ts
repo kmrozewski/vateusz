@@ -18,6 +18,7 @@ const translations = {
     pages: {
       upload: 'Dodaj plik',
       invoices: 'Faktury',
+      calculator: 'Kalkulator',
     },
   },
   invoice: {
@@ -68,6 +69,21 @@ const translations = {
     times: 'Liczba pozostałych rat',
     presentValue: 'Pozostała kwota do spłaty (zł)',
     result: 'Twoja miniratka: ',
+    formula: {
+      pmt: '\\(PMT = PV * \\frac{r}{(1 + r)^{-n}}\\)',
+      pmtDescription: 'PMT - rata kredytu',
+      monthlyRate: '\\(r = \\frac{\\frac{R}{12}}{100}\\)',
+      monthlyRateDescription: 'R - oprocentowanie kredytu',
+      rate: 'r - oprocentowanie miesięczne',
+      n: 'n - liczba pozostałych rat',
+      pv: 'PV - pozostała kwota do spłaty',
+    },
+    button: 'Oblicz',
+    form: {
+      max: 'Wartość musi być z przedziału 0 - ',
+      min: 'Liczba musi być większa od 0',
+      required: 'Te pole jest wymagane',
+    },
   },
 };
 

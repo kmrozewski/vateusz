@@ -4,6 +4,7 @@ import {useCognitoGroup} from '../hooks/useCognitoGroup';
 import UserRoutes from './userGroup/UserRoutes';
 import AdminRoutes from './userGroup/AdminRoutes';
 import {Container} from '@mui/material';
+import {MathJaxContext} from 'better-react-mathjax';
 
 const AuthRouter: React.FC<PropsWithChildren> = ({children}) => {
   const [isUser] = useCognitoGroup();
@@ -12,7 +13,7 @@ const AuthRouter: React.FC<PropsWithChildren> = ({children}) => {
     <BrowserRouter>
       <Container maxWidth="xl">
         {children}
-        {isUser ? <UserRoutes /> : <AdminRoutes />}
+        <MathJaxContext>{isUser ? <UserRoutes /> : <AdminRoutes />}</MathJaxContext>
       </Container>
     </BrowserRouter>
   );

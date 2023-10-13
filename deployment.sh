@@ -34,16 +34,16 @@ rm -rf build
 
 
 # Install & build
-npm install
+yarn install
 while true; do
   read -p "Do you want to deploy ONLY to development environment? (y/n) " yn
 
   case $yn in
     [yY] ) echo "Building dev..."
-      npm run build:dev;
+      yarn build:dev;
       break;;
     [nN] ) echo "Building prod..."
-      npm run build;
+      yarn build;
       break;;
     * ) echo "Invalid response";;
   esac

@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import './NavigationBar.scss';
 import {AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography} from '@mui/material';
 import ThemeSwitch from '../switch/ThemeSwitch';
+import {Pages} from '../../resources/Pages';
 
 const NavigationBar: React.FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const NavigationBar: React.FC = () => {
   const year = format(now, 'yyyy');
   const month = format(now, 'MM');
   const [isUser] = useCognitoGroup();
-  const invoicesPage = isUser ? '/invoices' : '/admin';
+  const invoicesPage = isUser ? Pages.InvoicesRoot : Pages.AdminRoot;
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -47,8 +48,9 @@ const NavigationBar: React.FC = () => {
   };
 
   const items = [
-    isUser && {key: 'upload', path: '/', label: t.navigation.pages.upload},
+    isUser && {key: 'upload', path: Pages.Home, label: t.navigation.pages.upload},
     {key: 'invoices', path: `${invoicesPage}/${year}/${month}`, label: t.navigation.pages.invoices},
+    {key: 'calculator', path: Pages.Calculator, label: t.navigation.pages.calculator},
   ];
 
   return (
