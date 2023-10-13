@@ -40,6 +40,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:dev": "env-cmd -f .env.local npm run build",
+    "build:prod": "env-cmd -f .env.production.local react-scripts build",
     "test": "react-scripts test"
   },
   "eslintConfig": {
